@@ -10,7 +10,7 @@ class LastCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Card(
-        elevation: 4,
+        elevation: 1,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(

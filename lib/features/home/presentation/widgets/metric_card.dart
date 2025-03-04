@@ -12,14 +12,11 @@ class MetricCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Card(
-        elevation: 4,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text(title), _buildLineChart()],
-          ),
+        elevation: 1,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [Text(title), Expanded(child: _buildLineChart())],
         ),
       ),
     );
@@ -34,9 +31,7 @@ class MetricCard extends StatelessWidget {
       FlSpot(4, 3),
     ];
 
-    return SizedBox(
-      height: 150,
-      child: LineChart(
+    return  LineChart(
         LineChartData(
           gridData: FlGridData(show: true),
           titlesData: FlTitlesData(show: true),
@@ -51,7 +46,6 @@ class MetricCard extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }

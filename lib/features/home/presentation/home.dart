@@ -9,37 +9,36 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("FFFFFFFF"),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(child: Text('Последние посещенные карточки')),
-          ),
-          SizedBox(
-            height: 100,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 8,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: LastCard(title: 'Карточка $index', onTap: () {}),
-                );
-              },
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Container(
+              color: Colors.amber,
+              height: 65,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 8,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 5.0),
+                    child: LastCard(title: 'Карточка $index', onTap: () {}),
+                  );
+                },
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(child: Text('Карточки')),
           ),
           Expanded(
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                crossAxisSpacing: 8.0,
-                mainAxisSpacing: 8.0,
+                crossAxisSpacing: 5.0,
+                mainAxisSpacing: 5.0,
+                childAspectRatio: 0.8,
               ),
               itemCount: 9,
               itemBuilder: (context, index) {
