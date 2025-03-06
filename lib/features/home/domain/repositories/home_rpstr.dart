@@ -1,9 +1,5 @@
-import '../entities/financial_metric.dart';
-import '../entities/production_metric.dart';
-import '../entities/workforce_metric.dart';
+import '../entities/chart_data.dart';
 
 abstract class HomeRpstr {
-  Future<FinancialMetric> getFinancialMetric();
-  Future<ProductionMetric> getProductionMetric();
-  Future<WorkforceMetric> getWorkforceMetric();
+  Future<ChartData> getChartData();
 }
