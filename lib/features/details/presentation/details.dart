@@ -6,8 +6,8 @@ class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.blueAccent,),
-      body: Container(color: Colors.amberAccent,),
+      appBar: AppBar(backgroundColor: Colors.blueAccent),
+      body: Container(color: Colors.amberAccent),
     );
   }
 }

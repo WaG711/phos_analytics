@@ -36,7 +36,7 @@ class Home extends StatelessWidget {
                 crossAxisCount: 2,
                 crossAxisSpacing: 5.0,
                 mainAxisSpacing: 5.0,
-                childAspectRatio: 0.8,
+                childAspectRatio: 0.75,
               ),
               itemCount: 9,
               itemBuilder: (context, index) {
