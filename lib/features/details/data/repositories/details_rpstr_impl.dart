@@ -1,0 +1,39 @@
+import '../../../../core/entities/chart_data.dart';
+import '../../domain/repositories/details_rpstr.dart';
+import '../api/details_api.dart';
+
+class DetailsRpstrImpl implements DetailsRpstr {
+  final DetailsApi api;
+
+  DetailsRpstrImpl(this.api);
+
+  @override
+  Future<ChartData> getChartDataHalfYear(String categoryId) {
+    // TODO: implement getChartDataHalfYear
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<ChartData> getChartDataMonth(String categoryId) {
+    // TODO: implement getChartDataMonth
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<ChartData> getChartDataQuarter(String categoryId) {
+    // TODO: implement getChartDataQuarter
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<ChartData> getChartDataWeek(String categoryId) {
+    // TODO: implement getChartDataWeek
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<ChartData> getChartDataYear(String categoryId) {
+    // TODO: implement getChartDataYear
+    throw UnimplementedError();
+  }
+}

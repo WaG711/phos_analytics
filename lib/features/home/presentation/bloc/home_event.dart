@@ -1,9 +1,9 @@
 abstract class HomeEvent {}
 
-class LoadHome extends HomeEvent {
-  LoadHome();
+class HomeLoad extends HomeEvent {
+  HomeLoad();
 }
 
-class RefreshHome extends HomeEvent {
-  RefreshHome();
+class HomeRefresh extends HomeEvent {
+  HomeRefresh();
 }

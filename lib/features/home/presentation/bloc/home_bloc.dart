@@ -5,7 +5,7 @@ import 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitial()) {
-    on<LoadHome>((event, emit) async {
+    on<HomeLoad>((event, emit) async {
       emit(HomeLoading());
       try {
         emit(HomeLoaded());
@@ -14,6 +14,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       }
     });
 
-    on<RefreshHome>((event, emit) async {});
+    on<HomeRefresh>((event, emit) async {});
   }
 }
