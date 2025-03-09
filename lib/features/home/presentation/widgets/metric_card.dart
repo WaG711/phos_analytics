@@ -3,14 +3,15 @@ import 'package:fl_chart/fl_chart.dart';
 
 class MetricCard extends StatelessWidget {
   final String title;
-  final VoidCallback onTap;
 
-  const MetricCard({super.key, required this.title, required this.onTap});
+  const MetricCard({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        Navigator.pushNamed(context, '/details');
+      },
       child: Card(
         elevation: 1,
         child: Column(
@@ -31,21 +32,21 @@ class MetricCard extends StatelessWidget {
       FlSpot(4, 3),
     ];
 
-    return  LineChart(
-        LineChartData(
-          gridData: FlGridData(show: true),
-          titlesData: FlTitlesData(show: true),
-          borderData: FlBorderData(show: true),
-          lineBarsData: [
-            LineChartBarData(
-              spots: data,
-              isCurved: true,
-              color: Colors.blue,
-              dotData: FlDotData(show: false),
-              belowBarData: BarAreaData(show: false),
-            ),
-          ],
-        ),
-      );
+    return LineChart(
+      LineChartData(
+        gridData: FlGridData(show: true),
+        titlesData: FlTitlesData(show: true),
+        borderData: FlBorderData(show: true),
+        lineBarsData: [
+          LineChartBarData(
+            spots: data,
+            isCurved: true,
+            color: Colors.blue,
+            dotData: FlDotData(show: false),
+            belowBarData: BarAreaData(show: false),
+          ),
+        ],
+      ),
+    );
   }
 }

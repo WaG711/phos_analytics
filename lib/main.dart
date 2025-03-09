@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'features/details/presentation/details.dart';
 import 'features/home/presentation/home.dart';
 
 void main() {
@@ -13,9 +14,10 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-        routes: {
-          '/': (context) => const Home(),
-        },
+      routes: {
+        '/': (context) => const Home(),
+        '/details': (context) => const Details(),
+      },
     );
   }
 }

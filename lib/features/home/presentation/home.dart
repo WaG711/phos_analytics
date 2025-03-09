@@ -24,7 +24,7 @@ class Home extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.only(right: 5.0),
-                    child: LastCard(title: 'Карточка $index', onTap: () {}),
+                    child: LastCard(title: 'Карточка $index'),
                   );
                 },
               ),
@@ -40,7 +40,7 @@ class Home extends StatelessWidget {
               ),
               itemCount: 9,
               itemBuilder: (context, index) {
-                return MetricCard(title: 'Карточка $index', onTap: () {});
+                return MetricCard(title: 'Карточка $index');
               },
             ),
           ),
