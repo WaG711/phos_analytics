@@ -1,4 +1,4 @@
-import '../entities/chart_data.dart';
+import '../../../../core/entities/chart_data.dart';
 import '../repositories/home_rpstr.dart';
 
 class HomeUsecase {

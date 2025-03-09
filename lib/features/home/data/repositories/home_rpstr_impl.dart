@@ -1,4 +1,4 @@
-import '../../domain/entities/chart_data.dart';
+import '../../../../core/entities/chart_data.dart';
 import '../../domain/repositories/home_rpstr.dart';
 import '../api/home_api.dart';
 
