@@ -20,7 +20,6 @@ class _DetailsState extends State<Details> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Переключатели периодов
             ToggleButtons(
               isSelected: List.generate(
                 periods.length,
@@ -47,8 +46,6 @@ class _DetailsState extends State<Details> {
             ),
 
             const SizedBox(height: 20),
-
-            // График
             Expanded(child: _buildLineChart()),
           ],
         ),

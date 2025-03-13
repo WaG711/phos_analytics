@@ -1,4 +1,6 @@
 import '../../../../core/entities/chart_data.dart';
+import '../../../../core/entities/chart_point.dart';
+import '../../../../core/models/chart_data_model.dart';
 import '../../domain/repositories/details_rpstr.dart';
 import '../api/details_api.dart';
 
@@ -8,32 +10,43 @@ class DetailsRpstrImpl implements DetailsRpstr {
   DetailsRpstrImpl(this.api);
 
   @override
-  Future<ChartData> getChartDataHalfYear(String categoryId) {
-    // TODO: implement getChartDataHalfYear
-    throw UnimplementedError();
+  Future<ChartData> getChartDataHalfYear(String categoryId) async {
+    final chartDataModel = await api.fetchChartDataHalfYear(categoryId);
+    return _mapChartDataModelToEntity(chartDataModel);
   }
 
   @override
-  Future<ChartData> getChartDataMonth(String categoryId) {
-    // TODO: implement getChartDataMonth
-    throw UnimplementedError();
+  Future<ChartData> getChartDataMonth(String categoryId) async {
+    final chartDataModel = await api.fetchChartDataMonth(categoryId);
+    return _mapChartDataModelToEntity(chartDataModel);
   }
 
   @override
-  Future<ChartData> getChartDataQuarter(String categoryId) {
-    // TODO: implement getChartDataQuarter
-    throw UnimplementedError();
+  Future<ChartData> getChartDataQuarter(String categoryId) async {
+    final chartDataModel = await api.fetchChartDataQuarter(categoryId);
+    return _mapChartDataModelToEntity(chartDataModel);
   }
 
   @override
-  Future<ChartData> getChartDataWeek(String categoryId) {
-    // TODO: implement getChartDataWeek
-    throw UnimplementedError();
+  Future<ChartData> getChartDataWeek(String categoryId) async {
+    final chartDataModel = await api.fetchChartDataWeek(categoryId);
+    return _mapChartDataModelToEntity(chartDataModel);
   }
 
   @override
-  Future<ChartData> getChartDataYear(String categoryId) {
-    // TODO: implement getChartDataYear
-    throw UnimplementedError();
+  Future<ChartData> getChartDataYear(String categoryId) async {
+    final chartDataModel = await api.fetchChartDataYear(categoryId);
+    return _mapChartDataModelToEntity(chartDataModel);
+  }
+
+  ChartData _mapChartDataModelToEntity(ChartDataModel model) {
+    return ChartData(
+      categoryId: model.categoryId,
+      title: model.title,
+      points:
+          model.points
+              .map((point) => ChartPoint(date: point.date, value: point.value))
+              .toList(),
+    );
   }
 }

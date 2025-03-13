@@ -1,16 +1,19 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../domain/usecases/home_usecase.dart';
 import 'home_event.dart';
 import 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super(HomeInitial()) {
+  final HomeUsecase usecase;
+  HomeBloc(this.usecase) : super(HomeInitial()) {
     on<HomeLoad>((event, emit) async {
       emit(HomeLoading());
       try {
-        emit(HomeLoaded());
+        final chartDataList = await usecase.executeChartDataDefoult();
+        emit(HomeLoaded(chartDataList));
       } catch (e) {
-        emit(HomeError("A"));
+        emit(HomeError("Произошла ошибка при загрузке данных"));
       }
     });
 
