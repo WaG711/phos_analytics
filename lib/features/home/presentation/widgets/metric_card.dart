@@ -47,11 +47,7 @@ class MetricCard extends StatelessWidget {
             topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
             rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
             bottomTitles: AxisTitles(
-              sideTitles: SideTitles(
-                showTitles: true,
-                getTitlesWidget: bottomTitleWidgets,
-                reservedSize: 30,
-              ),
+              sideTitles: SideTitles(showTitles: true, reservedSize: 30),
             ),
             leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
           ),
@@ -70,38 +66,5 @@ class MetricCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Widget bottomTitleWidgets(double value, TitleMeta meta) {
-    const style = TextStyle(fontWeight: FontWeight.bold, fontSize: 16);
-    Widget text;
-    switch (value.toInt()) {
-      case 0:
-        text = const Text("Пн", style: style);
-        break;
-      case 1:
-        text = const Text("Вт", style: style);
-        break;
-      case 2:
-        text = const Text("Ср", style: style);
-        break;
-      case 3:
-        text = const Text("Чт", style: style);
-        break;
-      case 4:
-        text = const Text("Пт", style: style);
-        break;
-      case 5:
-        text = const Text("Сб", style: style);
-        break;
-      case 6:
-        text = const Text("Вс", style: style);
-        break;
-      default:
-        text = const Text("");
-        break;
-    }
-
-    return SideTitleWidget(meta: meta, space: 10, child: text);
   }
 }
