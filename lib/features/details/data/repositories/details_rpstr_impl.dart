@@ -7,7 +7,7 @@ import '../api/details_api.dart';
 class DetailsRpstrImpl implements DetailsRpstr {
   final DetailsApi api;
 
-  DetailsRpstrImpl(this.api);
+  DetailsRpstrImpl({required this.api});
 
   @override
   Future<ChartData> getChartDataHalfYear(String categoryId) async {

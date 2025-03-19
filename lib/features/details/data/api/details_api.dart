@@ -3,9 +3,12 @@ import 'package:dio/dio.dart';
 import '../../../../core/models/chart_data_model.dart';
 
 class DetailsApi {
-  final Dio dio;
-
-  DetailsApi(this.dio);
+  final dio = Dio();
+  ChartDataModel test = ChartDataModel(
+    categoryId: "categoryId",
+    title: "title",
+    points: [],
+  );
 
   Future<ChartDataModel> fetchChartDataWeek(String categoryId) async {
     return _fetchChartData("/chart-data/week", categoryId);
@@ -31,20 +34,21 @@ class DetailsApi {
     String endpoint,
     String categoryId,
   ) async {
-    try {
-      final response = await dio.get(
-        endpoint,
-        queryParameters: {"categoryId": categoryId},
-        options: Options(responseType: ResponseType.json),
-      );
+    // try {
+    //   final response = await dio.get(
+    //     endpoint,
+    //     queryParameters: {"categoryId": categoryId},
+    //     options: Options(responseType: ResponseType.json),
+    //   );
 
-      if (response.statusCode == 200) {
-        return ChartDataModel.fromJson(response.data);
-      } else {
-        throw Exception("Ошибка запроса: ${response.statusCode}");
-      }
-    } catch (e) {
-      throw Exception("Ошибка при загрузке данных: $e");
-    }
+    //   if (response.statusCode == 200) {
+    //     return ChartDataModel.fromJson(response.data);
+    //   } else {
+    //     throw Exception("Ошибка запроса: ${response.statusCode}");
+    //   }
+    // } catch (e) {
+    //   throw Exception("Ошибка при загрузке данных: $e");
+    // }
+    return test;
   }
 }

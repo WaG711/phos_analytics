@@ -6,7 +6,7 @@ import '../api/home_api.dart';
 class HomeRpstrImpl implements HomeRpstr {
   final HomeApi api;
 
-  HomeRpstrImpl(this.api);
+  HomeRpstrImpl({required this.api});
 
   @override
   Future<List<ChartData>> getChartDataDefoult() async {

@@ -6,7 +6,7 @@ import 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final HomeUsecase usecase;
-  HomeBloc(this.usecase) : super(HomeInitial()) {
+  HomeBloc({required this.usecase}) : super(HomeInitial()) {
     on<HomeLoad>((event, emit) async {
       emit(HomeLoading());
       try {

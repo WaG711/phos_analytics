@@ -8,7 +8,7 @@ import 'details_state.dart';
 
 class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
   final DetailsUsecase usecase;
-  DetailsBloc(this.usecase) : super(DetailsInitial()) {
+  DetailsBloc({required this.usecase}) : super(DetailsInitial()) {
     on<DetailsLoad>((event, emit) async {
       emit(DetailsLoading());
       try {

@@ -4,7 +4,7 @@ import '../repositories/details_rpstr.dart';
 class DetailsUsecase {
   final DetailsRpstr rpstr;
 
-  DetailsUsecase(this.rpstr);
+  DetailsUsecase({required this.rpstr});
 
   Future<ChartData> executeChartDataWeek(String categoryId) async {
     return await rpstr.getChartDataWeek(categoryId);

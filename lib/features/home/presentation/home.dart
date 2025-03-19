@@ -1,50 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:phos_analytics/features/home/presentation/widgets/last_card.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:phos_analytics/features/home/presentation/bloc/home_event.dart';
+import 'package:phos_analytics/features/home/presentation/widgets/home_cards.dart';
 
-import 'widgets/metric_card.dart';
+import 'bloc/home_bloc.dart';
+import 'bloc/home_state.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
+    context.read<HomeBloc>().add(HomeLoad());
     return Scaffold(
       appBar: AppBar(title: Text("FFFFFFFF")),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: Container(
-              color: Colors.amber,
-              height: 65,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 8,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 5.0),
-                    child: LastCard(title: "Карточка $index"),
-                  );
-                },
-              ),
-            ),
-          ),
-          Expanded(
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 5.0,
-                mainAxisSpacing: 5.0,
-                childAspectRatio: 0.75,
-              ),
-              itemCount: 9,
-              itemBuilder: (context, index) {
-                return MetricCard(title: "Карточка $index");
+      body: BlocBuilder<HomeBloc, HomeState>(
+        builder: (context, state) {
+          if (state is HomeLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is HomeLoaded) {
+            final chartDataList = state.chartDataList;
+            return RefreshIndicator(
+              backgroundColor: const Color.fromARGB(255, 35, 35, 35),
+              onRefresh: () async {
+                context.read<HomeBloc>().add(HomeRefresh());
               },
-            ),
-          ),
-        ],
+              color: Colors.green,
+              child: HomeCards(chartDataList: chartDataList),
+            );
+          } else if (state is HomeError) {
+            return Center(child: Text(state.message));
+          }
+          return const Center(child: Text('Нет доступных данных'));
+        },
       ),
     );
   }

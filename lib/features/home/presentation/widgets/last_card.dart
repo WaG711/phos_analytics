@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/entities/chart_data.dart';
+
 class LastCard extends StatelessWidget {
-  final String title;
-  const LastCard({super.key, required this.title});
+  final ChartData chartData;
+
+  const LastCard({super.key, required this.chartData});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class LastCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text(title)],
+            children: [Text(chartData.title)],
           ),
         ),
       ),
