@@ -29,19 +29,17 @@ class BarChartDetails extends StatelessWidget {
           leftTitles: AxisTitles(
             sideTitles: SideTitles(
               showTitles: true,
-              reservedSize: 20,
-              getTitlesWidget:
-                  (value, meta) => Padding(
-                    padding: const EdgeInsets.only(right: 2),
-                    child: Text(
-                      value.toInt().toString(),
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
-                      ),
-                    ),
+              reservedSize: 30,
+              getTitlesWidget: (value, meta) {
+                return Text(
+                  value.toStringAsFixed(1),
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
                   ),
+                );
+              },
             ),
           ),
           bottomTitles: AxisTitles(
@@ -82,7 +80,10 @@ class BarChartDetails extends StatelessWidget {
                   BarChartRodData(
                     toY: chartPoint.value,
                     width: 14,
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(6),
+                      bottom: Radius.zero,
+                    ),
                     gradient: LinearGradient(
                       colors: [Colors.blueAccent, Colors.lightBlueAccent],
                       begin: Alignment.bottomCenter,
@@ -93,7 +94,7 @@ class BarChartDetails extends StatelessWidget {
                       toY: chartPoints
                           .map((e) => e.value)
                           .reduce((a, b) => a > b ? a : b),
-                      color: Colors.grey.shade200,
+                      color: Colors.blue[50],
                     ),
                   ),
                 ],
@@ -109,7 +110,7 @@ class BarChartDetails extends StatelessWidget {
             maxContentWidth: 120,
             getTooltipItem: (group, groupIndex, rod, rodIndex) {
               return BarTooltipItem(
-                rod.toY.toStringAsFixed(1),
+                rod.toY.toString(),
                 TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -117,7 +118,8 @@ class BarChartDetails extends StatelessWidget {
                 ),
               );
             },
-            tooltipBorder: BorderSide(color: Colors.blueAccent, width: 2),
+            getTooltipColor: (BarChartGroupData group) => Colors.white,
+            tooltipBorder: BorderSide(color: Colors.white),
           ),
         ),
       ),

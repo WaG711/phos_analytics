@@ -26,40 +26,21 @@ class LineChartHome extends StatelessWidget {
           show: true,
           topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
           rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
           bottomTitles: AxisTitles(
             sideTitles: SideTitles(
               showTitles: true,
-              reservedSize: 30,
+              reservedSize: 16,
               getTitlesWidget: (value, meta) {
                 int index = value.toInt();
-                if (index < 0 || index >= chartPoints.length) {
-                  return const SizedBox();
-                }
                 return Padding(
-                  padding: const EdgeInsets.only(top: 5),
+                  padding: const EdgeInsets.only(top: 2),
                   child: Text(
                     chartPoints[index].date,
                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                   ),
                 );
               },
-            ),
-          ),
-          leftTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: true,
-              reservedSize: 15,
-              getTitlesWidget:
-                  (value, meta) => Padding(
-                    padding: const EdgeInsets.only(right: 5),
-                    child: Text(
-                      value.toInt().toString(),
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
             ),
           ),
         ),
@@ -109,7 +90,7 @@ class LineChartHome extends StatelessWidget {
           touchTooltipData: LineTouchTooltipData(
             getTooltipColor: (LineBarSpot spot) => Colors.white,
             tooltipRoundedRadius: 8,
-            tooltipBorder: BorderSide(color: Colors.white, width: 1),
+            tooltipBorder: BorderSide(color: Colors.white),
             tooltipPadding: EdgeInsets.all(8),
           ),
         ),
