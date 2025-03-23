@@ -16,9 +16,8 @@ class LastCard extends StatelessWidget {
       child: Card(
         elevation: 1,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [Text(chartData.title)],
           ),
