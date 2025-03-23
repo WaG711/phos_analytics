@@ -6,6 +6,13 @@ class HomeApi {
   final dio = Dio();
   List<ChartDataModel> test = [
     ChartDataModel(categoryId: "categoryId", title: "title", points: []),
+    ChartDataModel(categoryId: "categoryId", title: "title", points: []),
+    ChartDataModel(categoryId: "categoryId", title: "title", points: []),
+    ChartDataModel(categoryId: "categoryId", title: "title", points: []),
+    ChartDataModel(categoryId: "categoryId", title: "title", points: []),
+    ChartDataModel(categoryId: "categoryId", title: "title", points: []),
+    ChartDataModel(categoryId: "categoryId", title: "title", points: []),
+    ChartDataModel(categoryId: "categoryId", title: "title", points: []),
   ];
 
   Future<List<ChartDataModel>> fetchChartDataDefoult() async {
