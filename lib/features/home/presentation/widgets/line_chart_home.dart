@@ -22,28 +22,97 @@ class LineChartHome extends StatelessWidget {
 
     return LineChart(
       LineChartData(
-        gridData: FlGridData(show: false),
+        gridData: FlGridData(
+          show: true,
+          drawVerticalLine: false,
+          getDrawingHorizontalLine:
+              (value) => FlLine(
+                color: Colors.grey.shade300,
+                strokeWidth: 1,
+                dashArray: [5, 5],
+              ),
+        ),
         titlesData: FlTitlesData(
           show: true,
           topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
           rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
           bottomTitles: AxisTitles(
-            sideTitles: SideTitles(showTitles: true, reservedSize: 30),
+            sideTitles: SideTitles(
+              showTitles: true,
+              reservedSize: 30,
+              getTitlesWidget:
+                  (value, meta) => Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Text(
+                      "X${value.toInt()}",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+            ),
           ),
-          leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          leftTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              reservedSize: 15,
+              getTitlesWidget:
+                  (value, meta) => Padding(
+                    padding: const EdgeInsets.only(right: 5),
+                    child: Text(
+                      value.toInt().toString(),
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+            ),
+          ),
         ),
-        borderData: FlBorderData(show: false),
+        borderData: FlBorderData(
+          show: true,
+          border: Border(
+            left: BorderSide(color: Colors.black, width: 1),
+            bottom: BorderSide(color: Colors.black, width: 1),
+          ),
+        ),
         lineBarsData: [
           LineChartBarData(
             spots: data,
             isCurved: true,
-            color: Colors.blue,
+            gradient: LinearGradient(colors: [Colors.blue, Colors.blueAccent]),
             barWidth: 3,
             isStrokeCapRound: true,
-            dotData: FlDotData(show: true),
-            belowBarData: BarAreaData(show: true, color: Colors.blue[100]),
+            dotData: FlDotData(
+              show: true,
+              getDotPainter:
+                  (spot, percent, barData, index) => FlDotCirclePainter(
+                    radius: 4,
+                    color: Colors.blueAccent,
+                    strokeWidth: 2,
+                    strokeColor: Colors.white,
+                  ),
+            ),
+            belowBarData: BarAreaData(
+              show: true,
+              gradient: LinearGradient(
+                colors: [Colors.blueAccent, Colors.transparent],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
           ),
         ],
+        lineTouchData: LineTouchData(
+          touchTooltipData: LineTouchTooltipData(
+            getTooltipColor: (LineBarSpot spot) => Colors.blueAccent,
+            tooltipRoundedRadius: 8,
+            tooltipBorder: BorderSide(color: Colors.white, width: 1),
+            tooltipPadding: EdgeInsets.all(8),
+          ),
+        ),
       ),
     );
   }

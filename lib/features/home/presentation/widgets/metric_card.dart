@@ -22,7 +22,7 @@ class MetricCard extends StatelessWidget {
           children: [
             Text(chartData.title),
             SizedBox(
-              height: 120,
+              height: 180,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 5.0,
