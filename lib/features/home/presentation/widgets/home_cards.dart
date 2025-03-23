@@ -22,10 +22,7 @@ class HomeCards extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: chartDataList.length,
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 5.0),
-                    child: LastCard(chartData: chartDataList[index]),
-                  );
+                  return LastCard(chartData: chartDataList[index]);
                 },
               ),
             ),
