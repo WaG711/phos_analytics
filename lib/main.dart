@@ -12,6 +12,8 @@ import 'features/home/domain/usecases/home_usecase.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
 import 'features/home/presentation/home.dart';
 
+/// 14 day > 24 week by 14 day > 12 months by 1 month > 1 year by half year
+
 void main() {
   runApp(const MainApp());
 }
