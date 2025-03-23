@@ -1,13 +1,24 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 
 import '../../../../core/models/chart_data_model.dart';
+import '../../../../core/models/chart_point_model.dart';
 
 class DetailsApi {
   final dio = Dio();
   ChartDataModel test = ChartDataModel(
     categoryId: "categoryId",
     title: "title",
-    points: [],
+    points: [
+      ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+      ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+      ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+      ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+      ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+      ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+      ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+    ],
   );
 
   Future<ChartDataModel> fetchChartDataWeek(String categoryId) async {

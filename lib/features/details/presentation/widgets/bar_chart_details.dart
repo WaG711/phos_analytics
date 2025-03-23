@@ -1,8 +1,7 @@
-import 'dart:math';
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:phos_analytics/core/entities/chart_point.dart';
+
+import '../../../../core/entities/chart_point.dart';
 
 class BarChartDetails extends StatelessWidget {
   final List<ChartPoint> chartPoints;
@@ -11,29 +10,6 @@ class BarChartDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<BarChartGroupData> data = [
-      BarChartGroupData(
-        x: 0,
-        barRods: [BarChartRodData(toY: 1, color: Colors.blue)],
-      ),
-      BarChartGroupData(
-        x: 1,
-        barRods: [BarChartRodData(toY: 2, color: Colors.blue)],
-      ),
-      BarChartGroupData(
-        x: 2,
-        barRods: [BarChartRodData(toY: 1, color: Colors.blue)],
-      ),
-      BarChartGroupData(
-        x: 3,
-        barRods: [BarChartRodData(toY: 3, color: Colors.blue)],
-      ),
-      BarChartGroupData(
-        x: 4,
-        barRods: [BarChartRodData(toY: 2, color: Colors.blue)],
-      ),
-    ];
-
     return BarChart(
       BarChartData(
         gridData: FlGridData(
@@ -72,18 +48,20 @@ class BarChartDetails extends StatelessWidget {
             sideTitles: SideTitles(
               showTitles: true,
               reservedSize: 30,
-              getTitlesWidget:
-                  (value, meta) => Padding(
-                    padding: const EdgeInsets.only(top: 5),
-                    child: Text(
-                      "X${value.toInt()}",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
-                      ),
+              getTitlesWidget: (value, meta) {
+                final chartPoint = chartPoints[value.toInt()];
+                return Padding(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: Text(
+                    chartPoint.date,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
                     ),
                   ),
+                );
+              },
             ),
           ),
         ),
@@ -95,13 +73,14 @@ class BarChartDetails extends StatelessWidget {
           ),
         ),
         barGroups:
-            data.map((entry) {
-              double randomY = Random().nextDouble() * 10;
+            chartPoints.asMap().entries.map((entry) {
+              final int index = entry.key;
+              final ChartPoint chartPoint = entry.value;
               return BarChartGroupData(
-                x: entry.x.toInt(),
+                x: index,
                 barRods: [
                   BarChartRodData(
-                    toY: randomY,
+                    toY: chartPoint.value,
                     width: 14,
                     borderRadius: BorderRadius.circular(6),
                     gradient: LinearGradient(
@@ -111,7 +90,9 @@ class BarChartDetails extends StatelessWidget {
                     ),
                     backDrawRodData: BackgroundBarChartRodData(
                       show: true,
-                      toY: 10,
+                      toY: chartPoints
+                          .map((e) => e.value)
+                          .reduce((a, b) => a > b ? a : b),
                       color: Colors.grey.shade200,
                     ),
                   ),

@@ -4,7 +4,7 @@ part 'chart_point_model.g.dart';
 
 @JsonSerializable()
 class ChartPointModel {
-  final DateTime date;
+  final String date;
   final double value;
 
   ChartPointModel({required this.date, required this.value});

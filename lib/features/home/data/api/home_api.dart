@@ -1,18 +1,104 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
+import 'package:phos_analytics/core/models/chart_point_model.dart';
 
 import '../../../../core/models/chart_data_model.dart';
 
 class HomeApi {
   final dio = Dio();
   List<ChartDataModel> test = [
-    ChartDataModel(categoryId: "categoryId", title: "title", points: []),
-    ChartDataModel(categoryId: "categoryId", title: "title", points: []),
-    ChartDataModel(categoryId: "categoryId", title: "title", points: []),
-    ChartDataModel(categoryId: "categoryId", title: "title", points: []),
-    ChartDataModel(categoryId: "categoryId", title: "title", points: []),
-    ChartDataModel(categoryId: "categoryId", title: "title", points: []),
-    ChartDataModel(categoryId: "categoryId", title: "title", points: []),
-    ChartDataModel(categoryId: "categoryId", title: "title", points: []),
+    ChartDataModel(
+      categoryId: "categoryId",
+      title: "title",
+      points: [
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+      ],
+    ),
+    ChartDataModel(
+      categoryId: "categoryId",
+      title: "title",
+      points: [
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+      ],
+    ),
+    ChartDataModel(
+      categoryId: "categoryId",
+      title: "title",
+      points: [
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+      ],
+    ),
+    ChartDataModel(
+      categoryId: "categoryId",
+      title: "title",
+      points: [
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+      ],
+    ),
+    ChartDataModel(
+      categoryId: "categoryId",
+      title: "title",
+      points: [
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+      ],
+    ),
+    ChartDataModel(
+      categoryId: "categoryId",
+      title: "title",
+      points: [
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+      ],
+    ),
+    ChartDataModel(
+      categoryId: "categoryId",
+      title: "title",
+      points: [
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+        ChartPointModel(date: "03/23", value: Random().nextDouble() * 10),
+      ],
+    ),
   ];
 
   Future<List<ChartDataModel>> fetchChartDataDefoult() async {

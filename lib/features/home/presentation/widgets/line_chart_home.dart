@@ -10,16 +10,6 @@ class LineChartHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<FlSpot> data = [
-      FlSpot(0, 1),
-      FlSpot(1, 2),
-      FlSpot(2, 1),
-      FlSpot(3, 2),
-      FlSpot(4, 3),
-      FlSpot(5, 4),
-      FlSpot(6, 2),
-    ];
-
     return LineChart(
       LineChartData(
         gridData: FlGridData(
@@ -40,17 +30,19 @@ class LineChartHome extends StatelessWidget {
             sideTitles: SideTitles(
               showTitles: true,
               reservedSize: 30,
-              getTitlesWidget:
-                  (value, meta) => Padding(
-                    padding: const EdgeInsets.only(top: 5),
-                    child: Text(
-                      "X${value.toInt()}",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+              getTitlesWidget: (value, meta) {
+                int index = value.toInt();
+                if (index < 0 || index >= chartPoints.length) {
+                  return const SizedBox();
+                }
+                return Padding(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: Text(
+                    chartPoints[index].date,
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                   ),
+                );
+              },
             ),
           ),
           leftTitles: AxisTitles(
@@ -80,7 +72,15 @@ class LineChartHome extends StatelessWidget {
         ),
         lineBarsData: [
           LineChartBarData(
-            spots: data,
+            spots:
+                chartPoints
+                    .asMap()
+                    .entries
+                    .map(
+                      (entry) =>
+                          FlSpot(entry.key.toDouble(), entry.value.value),
+                    )
+                    .toList(),
             isCurved: true,
             gradient: LinearGradient(colors: [Colors.blue, Colors.blueAccent]),
             barWidth: 3,
@@ -107,7 +107,7 @@ class LineChartHome extends StatelessWidget {
         ],
         lineTouchData: LineTouchData(
           touchTooltipData: LineTouchTooltipData(
-            getTooltipColor: (LineBarSpot spot) => Colors.blueAccent,
+            getTooltipColor: (LineBarSpot spot) => Colors.white,
             tooltipRoundedRadius: 8,
             tooltipBorder: BorderSide(color: Colors.white, width: 1),
             tooltipPadding: EdgeInsets.all(8),
