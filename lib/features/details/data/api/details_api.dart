@@ -21,34 +21,13 @@ class DetailsApi {
     ],
   );
 
-  Future<ChartDataModel> fetchChartDataWeek(String categoryId) async {
-    return _fetchChartData("/chart-data/week", categoryId);
-  }
-
-  Future<ChartDataModel> fetchChartDataMonth(String categoryId) async {
-    return _fetchChartData("/chart-data/month", categoryId);
-  }
-
-  Future<ChartDataModel> fetchChartDataQuarter(String categoryId) async {
-    return _fetchChartData("/chart-data/quarter", categoryId);
-  }
-
-  Future<ChartDataModel> fetchChartDataHalfYear(String categoryId) async {
-    return _fetchChartData("/chart-data/half-year", categoryId);
-  }
-
-  Future<ChartDataModel> fetchChartDataYear(String categoryId) async {
-    return _fetchChartData("/chart-data/year", categoryId);
-  }
-
-  Future<ChartDataModel> _fetchChartData(
-    String endpoint,
+  Future<ChartDataModel> fetchChartDataRange(
     String categoryId,
+    String dateRange,
   ) async {
     // try {
     //   final response = await dio.get(
-    //     endpoint,
-    //     queryParameters: {"categoryId": categoryId},
+    //     "",
     //     options: Options(responseType: ResponseType.json),
     //   );
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/entities/chart_period.dart';
 import 'bloc/details_bloc.dart';
 import 'bloc/details_event.dart';
 import 'bloc/details_state.dart';
@@ -12,9 +11,7 @@ class Details extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<DetailsBloc>().add(
-      DetailsLoad(categoryId: "categoryId", period: ChartPeriod.week),
-    );
+    context.read<DetailsBloc>().add(DetailsLoad(categoryId: "categoryId"));
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.blueAccent, title: Text("Card 1")),
       body: BlocBuilder<DetailsBloc, DetailsState>(
@@ -22,7 +19,6 @@ class Details extends StatelessWidget {
           if (state is DetailsLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is DetailsLoaded) {
-            final chartData = state.chartData;
             return RefreshIndicator(
               backgroundColor: const Color.fromARGB(255, 35, 35, 35),
               onRefresh: () async {
@@ -31,7 +27,10 @@ class Details extends StatelessWidget {
               color: Colors.green,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: DetailsInfo(chartData: chartData),
+                child: DetailsInfo(
+                  chartData: state.chartData,
+                  dateRange: state.dateRange,
+                ),
               ),
             );
           } else if (state is DetailsError) {

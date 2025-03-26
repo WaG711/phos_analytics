@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/entities/chart_period.dart';
+import '../bloc/details_bloc.dart';
+import '../bloc/details_event.dart';
 
 class QuickSelectionButtons extends StatelessWidget {
-  final Function(DateTimeRange) onRangeSelected;
+  final String categoryId;
 
-  const QuickSelectionButtons({super.key, required this.onRangeSelected});
+  const QuickSelectionButtons({super.key, required this.categoryId});
 
   @override
   Widget build(BuildContext context) {
@@ -12,56 +17,30 @@ class QuickSelectionButtons extends StatelessWidget {
       runSpacing: 10.0,
       alignment: WrapAlignment.center,
       children: [
-        ElevatedButton(
-          onPressed: () => _selectQuickRange('Неделя'),
-          child: Text("Неделя"),
-        ),
-        ElevatedButton(
-          onPressed: () => _selectQuickRange('Месяц'),
-          child: Text("Месяц"),
-        ),
-        ElevatedButton(
-          onPressed: () => _selectQuickRange('Квартал'),
-          child: Text("Квартал"),
-        ),
-        ElevatedButton(
-          onPressed: () => _selectQuickRange('Полгода'),
-          child: Text("Полгода"),
-        ),
-        ElevatedButton(
-          onPressed: () => _selectQuickRange('Год'),
-          child: Text("Год"),
-        ),
+        _buildButton(context, "Неделя", ChartPeriod.week),
+        _buildButton(context, "Месяц", ChartPeriod.month),
+        _buildButton(context, "Квартал", ChartPeriod.quarter),
+        _buildButton(context, "Полгода", ChartPeriod.halfYear),
+        _buildButton(context, "Год", ChartPeriod.year),
       ],
     );
   }
 
-  void _selectQuickRange(String period) {
-    DateTime now = DateTime.now();
-    DateTime start;
-
-    switch (period) {
-      case 'Неделя':
-        start = now.subtract(Duration(days: now.weekday - 1));
-        break;
-      case 'Месяц':
-        start = DateTime(now.year, now.month, 1);
-        break;
-      case 'Квартал':
-        int quarter = (now.month - 1) ~/ 3 + 1;
-        start = DateTime(now.year, (quarter - 1) * 3 + 1, 1);
-        break;
-      case 'Полгода':
-        int half = now.month <= 6 ? 1 : 2;
-        start = DateTime(now.year, half == 1 ? 1 : 7, 1);
-        break;
-      case 'Год':
-        start = DateTime(now.year, 1, 1);
-        break;
-      default:
-        return;
-    }
-
-    onRangeSelected(DateTimeRange(start: start, end: now));
+  Widget _buildButton(
+    BuildContext context,
+    String label,
+    ChartPeriod dateRange,
+  ) {
+    return ElevatedButton(
+      onPressed: () {
+        context.read<DetailsBloc>().add(
+          DetailsQuickPeriodSelected(
+            categoryId: categoryId,
+            dateRange: dateRange,
+          ),
+        );
+      },
+      child: Text(label),
+    );
   }
 }
