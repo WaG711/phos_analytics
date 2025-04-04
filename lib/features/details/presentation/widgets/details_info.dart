@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../core/entities/chart_data.dart';
+import '../../domain/entities/chart_data_e_d.dart';
 import '../bloc/details_bloc.dart';
 import '../bloc/details_event.dart';
 import 'bar_chart_details.dart';
 import 'quick_selection_buttons.dart';
 
 class DetailsInfo extends StatelessWidget {
-  final ChartData chartData;
+  final ChartDataED chartData;
   final DateTimeRange dateRange;
   const DetailsInfo({
     super.key,
@@ -25,7 +25,7 @@ class DetailsInfo extends StatelessWidget {
           onPressed: () async {
             DateTimeRange? picked = await showDateRangePicker(
               context: context,
-              firstDate: DateTime(2020),
+              firstDate: DateTime(2025),
               lastDate: DateTime.now(),
               initialDateRange: dateRange,
               helpText: "Выберите период",

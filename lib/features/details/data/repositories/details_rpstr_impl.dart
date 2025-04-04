@@ -1,5 +1,5 @@
-import '../../../../core/entities/chart_data.dart';
-import '../../../../core/entities/chart_point.dart';
+import '../../domain/entities/chart_data_e_d.dart';
+import '../../domain/entities/chart_point_e_d.dart';
 import '../../domain/repositories/details_rpstr.dart';
 import '../api/details_api.dart';
 
@@ -9,17 +9,20 @@ class DetailsRpstrImpl implements DetailsRpstr {
   DetailsRpstrImpl({required this.api});
 
   @override
-  Future<ChartData> getChartDataRange(
+  Future<ChartDataED> getChartDataRange(
     String categoryId,
     String dateRange,
   ) async {
     final chartDataModel = await api.fetchChartDataRange(categoryId, dateRange);
-    return ChartData(
+    return ChartDataED(
       categoryId: chartDataModel.categoryId,
       title: chartDataModel.title,
+      description: chartDataModel.description,
       points:
           chartDataModel.points
-              .map((point) => ChartPoint(date: point.date, value: point.value))
+              .map(
+                (point) => ChartPointED(date: point.date, value: point.value),
+              )
               .toList(),
     );
   }

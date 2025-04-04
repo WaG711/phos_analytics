@@ -1,44 +1,34 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/entities/chart_data.dart';
-import 'last_card.dart';
-import 'metric_card.dart';
+import '../../domain/entities/chart_data_e_h.dart';
+import 'line_chart_card.dart';
+import 'pie_chart_card.dart';
 
 class HomeCards extends StatelessWidget {
-  final List<ChartData> chartDataList;
+  final List<ChartDataEH> chartDataList;
   const HomeCards({super.key, required this.chartDataList});
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      physics: const BouncingScrollPhysics(),
       slivers: [
         SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: Container(
-              color: Colors.amber,
-              height: 65,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: chartDataList.length,
-                itemBuilder: (context, index) {
-                  return LastCard(chartData: chartDataList[index]);
-                },
-              ),
-            ),
-          ),
+          child: PieChartCard(value1: 10, value2: 3, value3: 2, value4: 4),
         ),
         SliverPadding(
-          padding: const EdgeInsets.all(5.0),
+          padding: const EdgeInsets.all(8),
           sliver: SliverGrid(
-            delegate: SliverChildBuilderDelegate((context, index) {
-              return MetricCard(chartData: chartDataList[index]);
-            }, childCount: chartDataList.length),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              crossAxisSpacing: 5.0,
-              mainAxisSpacing: 5.0,
-              childAspectRatio: 0.75,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+              childAspectRatio: 0.8,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              (context, index) =>
+                  LineChartCard(chartData: chartDataList[index]),
+              childCount: chartDataList.length,
             ),
           ),
         ),

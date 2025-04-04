@@ -1,11 +1,11 @@
-import 'chart_point.dart';
+import 'chart_point_e_h.dart';
 
-class ChartData {
+class ChartDataEH {
   final String categoryId;
   final String title;
-  final List<ChartPoint> points;
+  final List<ChartPointEH> points;
 
-  const ChartData({
+  ChartDataEH({
     required this.categoryId,
     required this.title,
     required this.points,

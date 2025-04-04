@@ -1,10 +1,10 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/entities/chart_point.dart';
+import '../../domain/entities/chart_point_e_d.dart';
 
 class BarChartDetails extends StatelessWidget {
-  final List<ChartPoint> chartPoints;
+  final List<ChartPointED> chartPoints;
 
   const BarChartDetails({super.key, required this.chartPoints});
 
@@ -73,7 +73,7 @@ class BarChartDetails extends StatelessWidget {
         barGroups:
             chartPoints.asMap().entries.map((entry) {
               final int index = entry.key;
-              final ChartPoint chartPoint = entry.value;
+              final ChartPointED chartPoint = entry.value;
               return BarChartGroupData(
                 x: index,
                 barRods: [

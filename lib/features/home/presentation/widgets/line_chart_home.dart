@@ -1,98 +1,113 @@
+import 'dart:math';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/entities/chart_point.dart';
+import '../../domain/entities/chart_data_e_h.dart';
 
 class LineChartHome extends StatelessWidget {
-  final List<ChartPoint> chartPoints;
+  final ChartDataEH chartData;
 
-  const LineChartHome({super.key, required this.chartPoints});
+  const LineChartHome({super.key, required this.chartData});
 
   @override
   Widget build(BuildContext context) {
-    return LineChart(
-      LineChartData(
-        gridData: FlGridData(
-          show: true,
-          drawVerticalLine: false,
-          getDrawingHorizontalLine:
-              (value) => FlLine(
-                color: Colors.grey.shade300,
-                strokeWidth: 1,
-                dashArray: [5, 5],
-              ),
-        ),
-        titlesData: FlTitlesData(
-          show: true,
-          topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-          rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-          leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-          bottomTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: true,
-              reservedSize: 16,
-              getTitlesWidget: (value, meta) {
-                int index = value.toInt();
-                return Padding(
-                  padding: const EdgeInsets.only(top: 2),
-                  child: Text(
-                    chartPoints[index].date,
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                  ),
-                );
-              },
-            ),
+    const primaryColor = Color(0xFF6200EE);
+    const surfaceColor = Color(0xFFFFFFFF);
+    const outlineColor = Color(0x1A000000);
+    const textColor = Color(0x99000000);
+    const shadowColor = Color(0x4D6200EE);
+
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, "/details", arguments: chartData);
+      },
+      child: LineChart(
+        LineChartData(
+          minX: 0,
+          maxX: (chartData.points.length - 1).toDouble(),
+          minY: chartData.points.map((e) => e.value).reduce(min),
+          maxY: chartData.points.map((e) => e.value).reduce(max) * 1.05,
+          gridData: FlGridData(
+            show: true,
+            drawVerticalLine: true,
+            getDrawingHorizontalLine:
+                (value) => const FlLine(color: outlineColor, strokeWidth: 1),
           ),
-        ),
-        borderData: FlBorderData(
-          show: true,
-          border: Border(
-            left: BorderSide(color: Colors.black, width: 1),
-            bottom: BorderSide(color: Colors.black, width: 1),
-          ),
-        ),
-        lineBarsData: [
-          LineChartBarData(
-            spots:
-                chartPoints
-                    .asMap()
-                    .entries
-                    .map(
-                      (entry) =>
-                          FlSpot(entry.key.toDouble(), entry.value.value),
-                    )
-                    .toList(),
-            isCurved: true,
-            gradient: LinearGradient(colors: [Colors.blue, Colors.blueAccent]),
-            barWidth: 3,
-            isStrokeCapRound: true,
-            dotData: FlDotData(
-              show: true,
-              getDotPainter:
-                  (spot, percent, barData, index) => FlDotCirclePainter(
-                    radius: 4,
-                    color: Colors.blueAccent,
-                    strokeWidth: 2,
-                    strokeColor: Colors.white,
-                  ),
+          titlesData: FlTitlesData(
+            show: true,
+            topTitles: const AxisTitles(
+              sideTitles: SideTitles(showTitles: false),
             ),
-            belowBarData: BarAreaData(
-              show: true,
-              gradient: LinearGradient(
-                colors: [Colors.blueAccent, Colors.transparent],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+            rightTitles: const AxisTitles(
+              sideTitles: SideTitles(showTitles: false),
+            ),
+            leftTitles: const AxisTitles(
+              sideTitles: SideTitles(showTitles: false, reservedSize: 24),
+            ),
+            bottomTitles: AxisTitles(
+              sideTitles: SideTitles(
+                showTitles: true,
+                reservedSize: 16,
+                interval: 1,
+                getTitlesWidget: (value, meta) {
+                  final index = value.toInt();
+                  if (index >= 0 && index < chartData.points.length) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 4),
+                      child: Text(
+                        chartData.points[index].date,
+                        style: const TextStyle(fontSize: 10, color: textColor),
+                      ),
+                    );
+                  }
+                  return const SizedBox();
+                },
               ),
             ),
           ),
-        ],
-        lineTouchData: LineTouchData(
-          touchTooltipData: LineTouchTooltipData(
-            getTooltipColor: (LineBarSpot spot) => Colors.white,
-            tooltipRoundedRadius: 8,
-            tooltipBorder: BorderSide(color: Colors.white),
-            tooltipPadding: EdgeInsets.all(8),
-          ),
+          borderData: FlBorderData(show: false),
+          lineBarsData: [
+            LineChartBarData(
+              spots:
+                  chartData.points
+                      .asMap()
+                      .entries
+                      .map(
+                        (entry) =>
+                            FlSpot(entry.key.toDouble(), entry.value.value),
+                      )
+                      .toList(),
+              isCurved: false,
+              color: primaryColor,
+              barWidth: 3,
+              isStrokeCapRound: true,
+              shadow: const BoxShadow(
+                color: shadowColor,
+                blurRadius: 8,
+                spreadRadius: 2,
+              ),
+              belowBarData: BarAreaData(
+                show: true,
+                gradient: const LinearGradient(
+                  colors: [Color(0x4D6200EE), Color(0x1A6200EE)],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+              dotData: FlDotData(
+                show: true,
+                getDotPainter:
+                    (spot, percent, barData, index) => FlDotCirclePainter(
+                      radius: 4,
+                      color: primaryColor,
+                      strokeWidth: 2,
+                      strokeColor: surfaceColor,
+                    ),
+              ),
+            ),
+          ],
+          lineTouchData: const LineTouchData(enabled: false),
         ),
       ),
     );

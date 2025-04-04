@@ -1,5 +1,5 @@
-import '../../../../core/entities/chart_data.dart';
+import '../entities/chart_data_e_d.dart';
 
 abstract class DetailsRpstr {
-  Future<ChartData> getChartDataRange(String categoryId, String dateRange);
+  Future<ChartDataED> getChartDataRange(String categoryId, String dateRange);
 }

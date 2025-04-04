@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../home/domain/entities/chart_data_e_h.dart';
 import 'bloc/details_bloc.dart';
 import 'bloc/details_event.dart';
 import 'bloc/details_state.dart';
@@ -11,9 +12,17 @@ class Details extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<DetailsBloc>().add(DetailsLoad(categoryId: "categoryId"));
+    final chartData = ModalRoute.of(context)?.settings.arguments as ChartDataEH;
+
+    context.read<DetailsBloc>().add(
+      DetailsLoad(categoryId: chartData.categoryId),
+    );
+
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.blueAccent, title: Text("Card 1")),
+      appBar: AppBar(
+        backgroundColor: Colors.blueAccent,
+        title: Text(chartData.title),
+      ),
       body: BlocBuilder<DetailsBloc, DetailsState>(
         builder: (context, state) {
           if (state is DetailsLoading) {

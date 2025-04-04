@@ -1,4 +1,4 @@
-import '../../../../core/entities/chart_data.dart';
+import '../entities/chart_data_e_d.dart';
 import '../repositories/details_rpstr.dart';
 
 class DetailsUsecase {
@@ -6,7 +6,7 @@ class DetailsUsecase {
 
   DetailsUsecase({required this.rpstr});
 
-  Future<ChartData> executeChartDataRange(
+  Future<ChartDataED> executeChartDataRange(
     String categoryId,
     String dateRange,
   ) async {

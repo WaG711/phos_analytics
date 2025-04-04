@@ -1,4 +1,4 @@
-import '../../../../core/entities/chart_data.dart';
+import '../entities/chart_data_e_h.dart';
 import '../repositories/home_rpstr.dart';
 
 class HomeUsecase {
@@ -6,7 +6,7 @@ class HomeUsecase {
 
   HomeUsecase({required this.rpstr});
 
-  Future<List<ChartData>> executeChartDataDefoult() async {
+  Future<List<ChartDataEH>> executeChartDataDefoult() async {
     return await rpstr.getChartDataDefoult();
   }
 }
