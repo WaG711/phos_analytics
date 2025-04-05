@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 import '../../domain/entities/chart_data_e_d.dart';
-import '../bloc/details_bloc.dart';
-import '../bloc/details_event.dart';
-import 'bar_chart_details.dart';
-import 'quick_selection_buttons.dart';
+import 'line_chart_details.dart';
+import 'quick_period_selector.dart';
 
 class DetailsInfo extends StatelessWidget {
   final ChartDataED chartData;
   final DateTimeRange dateRange;
+
   const DetailsInfo({
     super.key,
     required this.chartData,
@@ -19,38 +16,54 @@ class DetailsInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ElevatedButton(
-          onPressed: () async {
-            DateTimeRange? picked = await showDateRangePicker(
-              context: context,
-              firstDate: DateTime(2025),
-              lastDate: DateTime.now(),
-              initialDateRange: dateRange,
-              helpText: "Выберите период",
-              cancelText: "Отмена",
-              confirmText: "Выбрать",
-            );
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
 
-            if (picked != null) {
-              context.read<DetailsBloc>().add(
-                DetailsLoad(
-                  categoryId: chartData.categoryId,
-                  dateRange: picked,
+    return Scaffold(
+      backgroundColor: colors.surface,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            QuickPeriodSelector(categoryId: chartData.categoryId),
+            Expanded(
+              child: Card(
+                elevation: 1,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
                 ),
-              );
-            }
-          },
-          child: Text(
-            "${DateFormat('dd.MM.yyyy').format(dateRange.start)} - ${DateFormat('dd.MM.yyyy').format(dateRange.end)}",
-          ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: LineChartDetails(chartPoints: chartData.points),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    chartData.title,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: colors.onSurface,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    chartData.description,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: colors.onSurface.withValues(alpha: 0.9 * 255),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-        const SizedBox(height: 10),
-        QuickSelectionButtons(categoryId: chartData.categoryId),
-        const SizedBox(height: 20),
-        Expanded(child: BarChartDetails(chartPoints: chartData.points)),
-      ],
+      ),
     );
   }
 }

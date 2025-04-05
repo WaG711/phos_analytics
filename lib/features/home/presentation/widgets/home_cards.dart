@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/chart_data_e_h.dart';
-import 'line_chart_card.dart';
+import 'bar/bar_chart_card.dart';
 import 'pie/pie_chart_card.dart';
 
 class HomeCards extends StatelessWidget {
@@ -26,8 +26,7 @@ class HomeCards extends StatelessWidget {
               childAspectRatio: 0.8,
             ),
             delegate: SliverChildBuilderDelegate(
-              (context, index) =>
-                  LineChartCard(chartData: chartDataList[index]),
+              (context, index) => BarChartCard(chartData: chartDataList[index]),
               childCount: chartDataList.length,
             ),
           ),

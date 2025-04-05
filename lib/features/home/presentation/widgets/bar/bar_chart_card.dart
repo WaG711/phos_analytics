@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../domain/entities/chart_data_e_h.dart';
-import 'line_chart_home.dart';
+import '../../../domain/entities/chart_data_e_h.dart';
+import 'bar_chart_home.dart';
 
-class LineChartCard extends StatelessWidget {
+class BarChartCard extends StatelessWidget {
   final ChartDataEH chartData;
 
-  const LineChartCard({super.key, required this.chartData});
+  const BarChartCard({super.key, required this.chartData});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class LineChartCard extends StatelessWidget {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.only(right: 8, left: 8),
-                        child: LineChartHome(chartData: chartData),
+                        child: BarChartHome(chartData: chartData),
                       ),
                     ),
                   ),

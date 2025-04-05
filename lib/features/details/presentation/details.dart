@@ -5,6 +5,7 @@ import '../../home/domain/entities/chart_data_e_h.dart';
 import 'bloc/details_bloc.dart';
 import 'bloc/details_event.dart';
 import 'bloc/details_state.dart';
+import 'widgets/date_range_selector.dart';
 import 'widgets/details_info.dart';
 
 class Details extends StatelessWidget {
@@ -13,6 +14,8 @@ class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final chartData = ModalRoute.of(context)?.settings.arguments as ChartDataEH;
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
 
     context.read<DetailsBloc>().add(
       DetailsLoad(categoryId: chartData.categoryId),
@@ -20,8 +23,30 @@ class Details extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueAccent,
-        title: Text(chartData.title),
+        backgroundColor: colors.primary,
+        title: BlocBuilder<DetailsBloc, DetailsState>(
+          builder: (context, state) {
+            if (state is DetailsLoaded) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  DateRangeSelector(
+                    dateRange: state.dateRange,
+                    onDateRangeSelected: (newRange) {
+                      context.read<DetailsBloc>().add(
+                        DetailsLoad(
+                          categoryId: chartData.categoryId,
+                          dateRange: newRange,
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              );
+            }
+            return Text(chartData.title, style: TextStyle(color: Colors.white));
+          },
+        ),
       ),
       body: BlocBuilder<DetailsBloc, DetailsState>(
         builder: (context, state) {
