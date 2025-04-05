@@ -34,7 +34,12 @@ class DetailsInfo extends StatelessWidget {
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(
+                    right: 20,
+                    left: 20,
+                    top: 8,
+                    bottom: 10,
+                  ),
                   child: LineChartDetails(chartPoints: chartData.points),
                 ),
               ),

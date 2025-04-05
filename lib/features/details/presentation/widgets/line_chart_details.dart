@@ -38,27 +38,15 @@ class LineChartDetails extends StatelessWidget {
           rightTitles: const AxisTitles(
             sideTitles: SideTitles(showTitles: false),
           ),
-          leftTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: true,
-              reservedSize: 40,
-              getTitlesWidget: (value, meta) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: Text(
-                    value.toStringAsFixed(1),
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: colors.onSurface.withValues(alpha: 0.6 * 255),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
+          leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
           bottomTitles: AxisTitles(
             sideTitles: SideTitles(
               showTitles: true,
-              reservedSize: 24,
+              reservedSize: 21,
+              interval: (chartPoints.length / 4).floorToDouble().clamp(
+                1,
+                double.infinity,
+              ),
               getTitlesWidget: (value, meta) {
                 if (value.toInt() >= 0 && value.toInt() < chartPoints.length) {
                   return Padding(
