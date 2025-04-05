@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../domain/entities/chart_data_e_h.dart';
 import 'line_chart_card.dart';
-import 'pie_chart_card.dart';
+import 'pie/pie_chart_card.dart';
 
 class HomeCards extends StatelessWidget {
   final List<ChartDataEH> chartDataList;

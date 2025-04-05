@@ -13,7 +13,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<HomeBloc>().add(HomeLoad());
     return Scaffold(
-      appBar: AppBar(title: Text("Аналитика показателей")),
+      appBar: AppBar(title: Text("Аналитика")),
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           if (state is HomeLoading) {
