@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'pie_chart_card.dart';
+import '../../../domain/entities/pie_chart_section.dart';
 
 class PieChartLegend extends StatelessWidget {
-  final List<ChartSectionData> chartData;
+  final List<PieChartSection> chartData;
   final double total;
   const PieChartLegend({
     super.key,

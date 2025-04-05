@@ -19,14 +19,17 @@ class Home extends StatelessWidget {
           if (state is HomeLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is HomeLoaded) {
-            final chartDataList = state.chartDataList;
             return RefreshIndicator(
               backgroundColor: const Color.fromARGB(255, 35, 35, 35),
               onRefresh: () async {
                 context.read<HomeBloc>().add(HomeRefresh());
               },
               color: Colors.green,
-              child: HomeCards(chartDataList: chartDataList),
+              child: HomeCards(
+                chartDataList: state.chartDataList,
+                pieChartSectionList: state.pieChartSectionList,
+                total: state.total,
+              ),
             );
           } else if (state is HomeError) {
             return Center(child: Text(state.message));

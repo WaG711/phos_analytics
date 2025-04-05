@@ -1,3 +1,5 @@
+import 'package:phos_analytics/features/home/domain/entities/pie_chart_e_h.dart';
+
 import '../../domain/entities/chart_data_e_h.dart';
 import '../../domain/entities/chart_point_e_h.dart';
 import '../../domain/repositories/home_rpstr.dart';
@@ -9,8 +11,8 @@ class HomeRpstrImpl implements HomeRpstr {
   HomeRpstrImpl({required this.api});
 
   @override
-  Future<List<ChartDataEH>> getChartDataDefoult() async {
-    final listChartDataModel = await api.fetchChartDataDefoult();
+  Future<List<ChartDataEH>> getChartData() async {
+    final listChartDataModel = await api.fetchChartData();
 
     return listChartDataModel
         .map(
@@ -26,6 +28,15 @@ class HomeRpstrImpl implements HomeRpstr {
                     .toList(),
           ),
         )
+        .toList();
+  }
+
+  @override
+  Future<List<PieChartEH>> getPieChart() async {
+    final listPieChartModel = await api.fetchPieChart();
+
+    return listPieChartModel
+        .map((model) => PieChartEH(title: model.title, value: model.value))
         .toList();
   }
 }

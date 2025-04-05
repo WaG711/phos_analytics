@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/entities/chart_period.dart';
+import '../../domain/entities/chart_period.dart';
 import '../bloc/details_bloc.dart';
 import '../bloc/details_event.dart';
 

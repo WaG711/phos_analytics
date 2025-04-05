@@ -21,58 +21,58 @@ class Details extends StatelessWidget {
       DetailsLoad(categoryId: chartData.categoryId),
     );
 
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: colors.primary,
-        title: BlocBuilder<DetailsBloc, DetailsState>(
-          builder: (context, state) {
-            if (state is DetailsLoaded) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  DateRangeSelector(
-                    dateRange: state.dateRange,
-                    onDateRangeSelected: (newRange) {
-                      context.read<DetailsBloc>().add(
-                        DetailsLoad(
-                          categoryId: chartData.categoryId,
-                          dateRange: newRange,
+    return BlocBuilder<DetailsBloc, DetailsState>(
+      builder: (context, state) {
+        return Scaffold(
+          appBar:
+              state is DetailsLoaded
+                  ? AppBar(
+                    backgroundColor: colors.primary,
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        DateRangeSelector(
+                          dateRange: state.dateRange,
+                          onDateRangeSelected: (newRange) {
+                            context.read<DetailsBloc>().add(
+                              DetailsLoad(
+                                categoryId: chartData.categoryId,
+                                dateRange: newRange,
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
+                      ],
+                    ),
+                  )
+                  : null,
+          body: Builder(
+            builder: (context) {
+              if (state is DetailsLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is DetailsLoaded) {
+                return RefreshIndicator(
+                  backgroundColor: const Color.fromARGB(255, 35, 35, 35),
+                  onRefresh: () async {
+                    context.read<DetailsBloc>().add(DetailsRefresh());
+                  },
+                  color: Colors.green,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: DetailsInfo(
+                      chartData: state.chartData,
+                      dateRange: state.dateRange,
+                    ),
                   ),
-                ],
-              );
-            }
-            return Text(chartData.title, style: TextStyle(color: Colors.white));
-          },
-        ),
-      ),
-      body: BlocBuilder<DetailsBloc, DetailsState>(
-        builder: (context, state) {
-          if (state is DetailsLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is DetailsLoaded) {
-            return RefreshIndicator(
-              backgroundColor: const Color.fromARGB(255, 35, 35, 35),
-              onRefresh: () async {
-                context.read<DetailsBloc>().add(DetailsRefresh());
-              },
-              color: Colors.green,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: DetailsInfo(
-                  chartData: state.chartData,
-                  dateRange: state.dateRange,
-                ),
-              ),
-            );
-          } else if (state is DetailsError) {
-            return Center(child: Text(state.message));
-          }
-          return const Center(child: Text('Нет доступных данных'));
-        },
-      ),
+                );
+              } else if (state is DetailsError) {
+                return Center(child: Text(state.message));
+              }
+              return const Center(child: Text('Нет доступных данных'));
+            },
+          ),
+        );
+      },
     );
   }
 }

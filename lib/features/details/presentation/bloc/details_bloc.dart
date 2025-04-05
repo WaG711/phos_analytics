@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../core/entities/chart_period.dart';
+import '../../domain/entities/chart_period.dart';
 import '../../domain/usecases/details_usecase.dart';
 import 'details_event.dart';
 import 'details_state.dart';

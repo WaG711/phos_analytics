@@ -1,12 +1,12 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import 'pie_chart_card.dart';
+import '../../../domain/entities/pie_chart_section.dart';
 
 class PieChartHome extends StatelessWidget {
-  final List<ChartSectionData> chartData;
+  final List<PieChartSection> pieChart;
   final double total;
-  const PieChartHome({super.key, required this.chartData, required this.total});
+  const PieChartHome({super.key, required this.pieChart, required this.total});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class PieChartHome extends StatelessWidget {
         sectionsSpace: 5,
         centerSpaceRadius: 40,
         sections:
-            chartData.map((data) {
+            pieChart.map((data) {
               return PieChartSectionData(
                 value: (data.value / total) * 100,
                 color: data.color,

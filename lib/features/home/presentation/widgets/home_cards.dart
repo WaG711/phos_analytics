@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/chart_data_e_h.dart';
+import '../../domain/entities/pie_chart_section.dart';
 import 'bar/bar_chart_card.dart';
 import 'pie/pie_chart_card.dart';
 
 class HomeCards extends StatelessWidget {
   final List<ChartDataEH> chartDataList;
-  const HomeCards({super.key, required this.chartDataList});
+  final List<PieChartSection> pieChartSectionList;
+  final double total;
+  const HomeCards({
+    super.key,
+    required this.chartDataList,
+    required this.pieChartSectionList,
+    required this.total,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +22,10 @@ class HomeCards extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       slivers: [
         SliverToBoxAdapter(
-          child: PieChartCard(value1: 10, value2: 3, value3: 2, value4: 4),
+          child: PieChartCard(
+            pieChartSectionList: pieChartSectionList,
+            total: total,
+          ),
         ),
         SliverPadding(
           padding: const EdgeInsets.all(8),

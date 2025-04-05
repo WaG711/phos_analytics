@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/entities/chart_period.dart';
+import '../../domain/entities/chart_period.dart';
 
 abstract class DetailsEvent {}
 

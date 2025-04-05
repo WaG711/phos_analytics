@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/entities/chart_period.dart';
+import '../../domain/entities/chart_period.dart';
 import 'period_chip.dart';
 
 class QuickPeriodSelector extends StatelessWidget {
