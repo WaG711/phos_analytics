@@ -37,7 +37,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
           ),
         );
       } catch (e) {
-        emit(DetailsError("Ошибка загрузки данных"));
+        emit(DetailsError(e.toString()));
       }
     });
 
@@ -57,7 +57,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
 
         emit(DetailsLoaded(chartData: chartData, dateRange: dateRange));
       } catch (e) {
-        emit(DetailsError("Ошибка загрузки данных"));
+        emit(DetailsError(e.toString()));
       }
     });
 

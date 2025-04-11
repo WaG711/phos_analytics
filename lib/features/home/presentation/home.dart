@@ -32,9 +32,12 @@ class Home extends StatelessWidget {
               ),
             );
           } else if (state is HomeError) {
-            return Center(child: Text(state.message));
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Center(child: Text(state.message)),
+            );
           }
-          return const Center(child: Text('Нет доступных данных'));
+          return const Center(child: Text("ERROR: Widget Center Home"));
         },
       ),
     );

@@ -4,7 +4,12 @@ import '../models/chart_data_m_h.dart';
 import '../models/pie_chart_m_h.dart';
 
 class HomeApi {
-  final dio = Dio();
+  final dio = Dio(
+    BaseOptions(
+      connectTimeout: Duration(seconds: 5),
+      receiveTimeout: Duration(seconds: 10),
+    ),
+  );
 
   Future<List<ChartDataMH>> fetchChartData() async {
     try {
@@ -18,10 +23,10 @@ class HomeApi {
             .map((json) => ChartDataMH.fromJson(json))
             .toList();
       } else {
-        throw Exception("Ошибка запроса: ${response.statusCode}");
+        throw Exception(response.statusCode);
       }
     } catch (e) {
-      throw Exception("Ошибка при загрузке данных: $e");
+      throw Exception(e.toString());
     }
   }
 
@@ -37,10 +42,10 @@ class HomeApi {
             .map((json) => PieChartMH.fromJson(json))
             .toList();
       } else {
-        throw Exception("Ошибка запроса: ${response.statusCode}");
+        throw Exception(response.statusCode);
       }
     } catch (e) {
-      throw Exception("Ошибка при загрузке данных: $e");
+      throw Exception(e.toString());
     }
   }
 }

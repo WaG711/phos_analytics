@@ -52,7 +52,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           ),
         );
       } catch (e) {
-        emit(HomeError("Произошла ошибка при загрузке данных"));
+        emit(HomeError(e.toString()));
       }
     });
 

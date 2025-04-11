@@ -3,7 +3,12 @@ import 'package:dio/dio.dart';
 import '../models/chart_data_m_d.dart';
 
 class DetailsApi {
-  final dio = Dio();
+  final dio = Dio(
+    BaseOptions(
+      connectTimeout: Duration(seconds: 10),
+      receiveTimeout: Duration(seconds: 15),
+    ),
+  );
 
   Future<ChartDataMD> fetchChartDataRange(
     String categoryId,
@@ -18,10 +23,10 @@ class DetailsApi {
       if (response.statusCode == 200) {
         return ChartDataMD.fromJson(response.data);
       } else {
-        throw Exception("Ошибка запроса: ${response.statusCode}");
+        throw Exception(response.statusCode);
       }
     } catch (e) {
-      throw Exception("Ошибка при загрузке данных: $e");
+      throw Exception(e.toString());
     }
   }
 }
