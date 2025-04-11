@@ -61,12 +61,29 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
       }
     });
 
+    on<DetailsForecast>((event, emit) async {
+      emit(DetailsLoading());
+
+      try {
+        DateTimeRange dateRange = _selectQuickRange(ChartPeriod.nextMonth);
+
+        final chartData = await usecase.executeChartDataForecast(
+          event.categoryId,
+        );
+
+        emit(DetailsLoaded(chartData: chartData, dateRange: dateRange));
+      } catch (e) {
+        emit(DetailsError(e.toString()));
+      }
+    });
+
     on<DetailsRefresh>((event, emit) async {});
   }
 
   DateTimeRange _selectQuickRange(ChartPeriod period) {
     final DateTime now = DateTime.now();
     DateTime start;
+    DateTime end = now;
 
     switch (period) {
       case ChartPeriod.week:
@@ -86,8 +103,14 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
       case ChartPeriod.year:
         start = DateTime(now.year, 1, 1);
         break;
+      case ChartPeriod.nextMonth:
+        int nextMonth = now.month == 12 ? 1 : now.month + 1;
+        int nextYear = now.month == 12 ? now.year + 1 : now.year;
+        start = DateTime(nextYear, nextMonth, 1);
+        end = DateTime(nextYear, nextMonth + 1, 0);
+        break;
     }
 
-    return DateTimeRange(start: start, end: now);
+    return DateTimeRange(start: start, end: end);
   }
 }

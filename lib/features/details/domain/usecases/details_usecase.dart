@@ -12,4 +12,8 @@ class DetailsUsecase {
   ) async {
     return await rpstr.getChartDataRange(categoryId, dateRange);
   }
+
+  Future<ChartDataED> executeChartDataForecast(String categoryId) async {
+    return await rpstr.getChartDataForecast(categoryId);
+  }
 }

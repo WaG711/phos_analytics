@@ -26,4 +26,20 @@ class DetailsRpstrImpl implements DetailsRpstr {
               .toList(),
     );
   }
+
+  @override
+  Future<ChartDataED> getChartDataForecast(String categoryId) async {
+    final chartDataModel = await api.fetchChartDataForecast(categoryId);
+    return ChartDataED(
+      categoryId: chartDataModel.categoryId,
+      title: chartDataModel.title,
+      description: chartDataModel.description,
+      points:
+          chartDataModel.points
+              .map(
+                (point) => ChartPointED(date: point.date, value: point.value),
+              )
+              .toList(),
+    );
+  }
 }

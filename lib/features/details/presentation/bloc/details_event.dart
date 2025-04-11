@@ -21,6 +21,12 @@ class DetailsQuickPeriodSelected extends DetailsEvent {
   });
 }
 
+class DetailsForecast extends DetailsEvent {
+  final String categoryId;
+
+  DetailsForecast({required this.categoryId});
+}
+
 class DetailsRefresh extends DetailsEvent {
   DetailsRefresh();
 }

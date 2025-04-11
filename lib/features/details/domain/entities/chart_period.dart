@@ -1,1 +1,1 @@
-enum ChartPeriod { week, month, quarter, halfYear, year }
+enum ChartPeriod { week, month, quarter, halfYear, year, nextMonth }
