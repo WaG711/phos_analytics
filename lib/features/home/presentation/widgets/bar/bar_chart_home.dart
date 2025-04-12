@@ -2,7 +2,10 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../details/presentation/bloc/details_bloc.dart';
+import '../../../../details/presentation/bloc/details_event.dart';
 import '../../../domain/entities/chart_data_e_h.dart';
 
 class BarChartHome extends StatelessWidget {
@@ -18,7 +21,14 @@ class BarChartHome extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, "/details", arguments: chartData);
+        context.read<DetailsBloc>().add(
+          DetailsLoad(categoryId: chartData.categoryId),
+        );
+        Navigator.pushNamed(
+          context,
+          "/details",
+          arguments: chartData.categoryId,
+        );
       },
       child: BarChart(
         BarChartData(

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/entities/chart_period.dart';
-import '../bloc/details_bloc.dart';
-import '../bloc/details_event.dart';
 import 'period_chip.dart';
 
 class QuickPeriodSelector extends StatelessWidget {
@@ -17,18 +14,6 @@ class QuickPeriodSelector extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
-          FilterChip(
-            label: Text("Прогноз"),
-            onSelected: (_) {
-              context.read<DetailsBloc>().add(
-                DetailsForecast(categoryId: categoryId),
-              );
-            },
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-          const SizedBox(width: 8),
           PeriodChip(
             label: "Неделя",
             period: ChartPeriod.week,

@@ -26,7 +26,3 @@ class DetailsForecast extends DetailsEvent {
 
   DetailsForecast({required this.categoryId});
 }
-
-class DetailsRefresh extends DetailsEvent {
-  DetailsRefresh();
-}

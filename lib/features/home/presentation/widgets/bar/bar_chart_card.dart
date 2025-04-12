@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../details/presentation/bloc/details_bloc.dart';
+import '../../../../details/presentation/bloc/details_event.dart';
 import '../../../domain/entities/chart_data_e_h.dart';
 import 'bar_chart_home.dart';
 
@@ -16,9 +19,16 @@ class BarChartCard extends StatelessWidget {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap:
-            () =>
-                Navigator.pushNamed(context, "/details", arguments: chartData),
+        onTap: () {
+          context.read<DetailsBloc>().add(
+            DetailsLoad(categoryId: chartData.categoryId),
+          );
+          Navigator.pushNamed(
+            context,
+            "/details",
+            arguments: chartData.categoryId,
+          );
+        },
         child: Card(
           elevation: 2,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

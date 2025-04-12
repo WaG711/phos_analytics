@@ -76,8 +76,6 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
         emit(DetailsError(e.toString()));
       }
     });
-
-    on<DetailsRefresh>((event, emit) async {});
   }
 
   DateTimeRange _selectQuickRange(ChartPeriod period) {
