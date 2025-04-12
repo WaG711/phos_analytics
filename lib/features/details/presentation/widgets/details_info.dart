@@ -36,7 +36,7 @@ class DetailsInfo extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(
                     right: 20,
-                    left: 20,
+                    left: 8,
                     top: 8,
                     bottom: 10,
                   ),
