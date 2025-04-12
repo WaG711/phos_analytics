@@ -4,11 +4,11 @@ import '../../domain/entities/chart_data_e_d.dart';
 import 'line_chart_details.dart';
 import 'quick_period_selector.dart';
 
-class DetailsInfo extends StatelessWidget {
+class DetailsBase extends StatelessWidget {
   final ChartDataED chartData;
   final DateTimeRange dateRange;
 
-  const DetailsInfo({
+  const DetailsBase({
     super.key,
     required this.chartData,
     required this.dateRange,

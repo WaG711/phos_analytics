@@ -5,11 +5,11 @@ import '../../domain/entities/pie_chart_section.dart';
 import 'bar/bar_chart_card.dart';
 import 'pie/pie_chart_card.dart';
 
-class HomeCards extends StatelessWidget {
+class HomeBase extends StatelessWidget {
   final List<ChartDataEH> chartDataList;
   final List<PieChartSection> pieChartSectionList;
   final double total;
-  const HomeCards({
+  const HomeBase({
     super.key,
     required this.chartDataList,
     required this.pieChartSectionList,

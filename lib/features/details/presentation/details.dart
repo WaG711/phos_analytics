@@ -5,7 +5,7 @@ import 'bloc/details_bloc.dart';
 import 'bloc/details_event.dart';
 import 'bloc/details_state.dart';
 import 'widgets/date_range_selector.dart';
-import 'widgets/details_info.dart';
+import 'widgets/details_base.dart';
 
 class Details extends StatelessWidget {
   const Details({super.key});
@@ -55,7 +55,7 @@ class Details extends StatelessWidget {
               if (state is DetailsLoading) {
                 return const Center(child: CircularProgressIndicator());
               } else if (state is DetailsLoaded) {
-                return DetailsInfo(
+                return DetailsBase(
                   chartData: state.chartData,
                   dateRange: state.dateRange,
                 );
