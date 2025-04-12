@@ -17,24 +17,38 @@ class DateRangeSelector extends StatelessWidget {
 
     return FilledButton.tonal(
       style: FilledButton.styleFrom(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       ),
       onPressed: () async {
+        DateTime now = DateTime.now();
+        DateTime startDate = dateRange.start;
+        DateTime endDate = dateRange.end;
+
+        if (startDate.isAfter(now)) {
+          startDate = now;
+          endDate = now;
+        }
+
         final picked = await showDateRangePicker(
           context: context,
-          firstDate: DateTime(2020),
-          lastDate: DateTime.now(),
-          initialDateRange: dateRange,
+          firstDate: DateTime(2025),
+          lastDate: now,
+          initialDateRange: DateTimeRange(start: startDate, end: endDate),
           helpText: "Выберите период",
           cancelText: "Отмена",
           confirmText: "Выбрать",
+          fieldStartHintText: "Выберите начало",
+          fieldEndHintText: "Выберите конец",
+          fieldStartLabelText: "Начало",
+          fieldEndLabelText: "Конец",
+          saveText: "Сохранить",
           builder: (context, child) {
             return Theme(
               data: theme.copyWith(
                 dialogTheme: DialogTheme(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(6),
                   ),
                 ),
               ),
@@ -53,8 +67,8 @@ class DateRangeSelector extends StatelessWidget {
           const Icon(Icons.calendar_today, size: 18),
           const SizedBox(width: 8),
           Text(
-            "${DateFormat('dd MMM yyyy').format(dateRange.start)} - "
-            "${DateFormat('dd MMM yyyy').format(dateRange.end)}",
+            "${DateFormat('dd.MM.yy').format(dateRange.start)} - "
+            "${DateFormat('dd.MM.yy').format(dateRange.end)}",
             style: theme.textTheme.bodyMedium,
           ),
         ],

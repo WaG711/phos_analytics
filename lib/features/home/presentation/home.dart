@@ -11,7 +11,10 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<HomeBloc>().add(HomeLoad());
+    if (context.read<HomeBloc>().state is HomeInitial) {
+      context.read<HomeBloc>().add(HomeLoad());
+    }
+
     return Scaffold(
       appBar: AppBar(title: Text("Аналитика")),
       body: BlocBuilder<HomeBloc, HomeState>(

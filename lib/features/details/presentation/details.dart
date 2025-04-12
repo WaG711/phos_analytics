@@ -17,35 +17,39 @@ class Details extends StatelessWidget {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
 
-    context.read<DetailsBloc>().add(
-      DetailsLoad(categoryId: chartData.categoryId),
-    );
+    if (context.read<DetailsBloc>().state is DetailsInitial) {
+      context.read<DetailsBloc>().add(
+        DetailsLoad(categoryId: chartData.categoryId),
+      );
+    }
 
     return BlocBuilder<DetailsBloc, DetailsState>(
       builder: (context, state) {
         return Scaffold(
-          appBar:
-              state is DetailsLoaded
-                  ? AppBar(
-                    backgroundColor: colors.primary,
-                    title: Row(
+          appBar: AppBar(
+            backgroundColor: colors.primary,
+            title:
+                state is DetailsLoaded
+                    ? Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         DateRangeSelector(
                           dateRange: state.dateRange,
                           onDateRangeSelected: (newRange) {
-                            context.read<DetailsBloc>().add(
-                              DetailsLoad(
-                                categoryId: chartData.categoryId,
-                                dateRange: newRange,
-                              ),
-                            );
+                            if (newRange != state.dateRange) {
+                              context.read<DetailsBloc>().add(
+                                DetailsLoad(
+                                  categoryId: chartData.categoryId,
+                                  dateRange: newRange,
+                                ),
+                              );
+                            }
                           },
                         ),
                       ],
-                    ),
-                  )
-                  : null,
+                    )
+                    : null,
+          ),
           body: Builder(
             builder: (context) {
               if (state is DetailsLoading) {
@@ -57,12 +61,9 @@ class Details extends StatelessWidget {
                     context.read<DetailsBloc>().add(DetailsRefresh());
                   },
                   color: Colors.green,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: DetailsInfo(
-                      chartData: state.chartData,
-                      dateRange: state.dateRange,
-                    ),
+                  child: DetailsInfo(
+                    chartData: state.chartData,
+                    dateRange: state.dateRange,
                   ),
                 );
               } else if (state is DetailsError) {

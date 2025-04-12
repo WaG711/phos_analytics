@@ -65,7 +65,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
       emit(DetailsLoading());
 
       try {
-        DateTimeRange dateRange = _selectQuickRange(ChartPeriod.nextMonth);
+        DateTimeRange dateRange = _selectQuickRange(ChartPeriod.next30Days);
 
         final chartData = await usecase.executeChartDataForecast(
           event.categoryId,
@@ -103,11 +103,9 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
       case ChartPeriod.year:
         start = DateTime(now.year, 1, 1);
         break;
-      case ChartPeriod.nextMonth:
-        int nextMonth = now.month == 12 ? 1 : now.month + 1;
-        int nextYear = now.month == 12 ? now.year + 1 : now.year;
-        start = DateTime(nextYear, nextMonth, 1);
-        end = DateTime(nextYear, nextMonth + 1, 0);
+      case ChartPeriod.next30Days:
+        start = now.add(Duration(days: 1));
+        end = start.add(Duration(days: 30));
         break;
     }
 
