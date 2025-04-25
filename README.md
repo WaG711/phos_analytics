@@ -10,11 +10,8 @@
   1. Сводка за прошлый месяц в процентном соотношении;
   2. Данные в виде столбчатой диаграммы за предыдущие 7 дней.
      
-  ![1](https://github.com/user-attachments/assets/6fdf436f-437c-4605-a5e1-0b89e57bc52c)
+  ![1](https://github.com/user-attachments/assets/6fdf436f-437c-4605-a5e1-0b89e57bc52c)  ![2](https://github.com/user-attachments/assets/10946537-7ba3-45fb-8533-fa2bfb1c26aa)  ![3](https://github.com/user-attachments/assets/fb9f1b42-018d-4ba3-b5e6-9eb2cdf8f091)
 
-  ![2](https://github.com/user-attachments/assets/e58a507e-cd06-4c04-90a2-f229930eef3b)
-  ![3](https://github.com/user-attachments/assets/8083615a-05d0-4843-9c6b-7db6f344aa0f)
-    
 Детальный просмотр:
   1. Кнопка для прогноза по данной бизнес-метрике;
   2. Возможность выбрать нужный диапазон дат через календарь;
@@ -22,6 +19,5 @@
   4. Линейная диаграмма;
   5. Краткое описание показателя.
 
-  ![4](https://github.com/user-attachments/assets/e3d5bcd7-da79-429a-8f4c-85fdcc219544)
-  ![5](https://github.com/user-attachments/assets/f6ecd170-8c1b-4044-982c-770e3bfa6ad9)
+  ![4](https://github.com/user-attachments/assets/98ced80e-561a-4af5-b04b-225fafc326c4)  ![5](https://github.com/user-attachments/assets/f468fac0-595d-4369-907d-6bd43251f550)
 
