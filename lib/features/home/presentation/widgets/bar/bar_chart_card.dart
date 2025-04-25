@@ -13,8 +13,7 @@ class BarChartCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const gradientStartColor = Color(0x80E8DEF8);
-    const gradientEndColor = Color(0x33E8DEF8);
+    final colorScheme = Theme.of(context).colorScheme;
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
@@ -30,32 +29,43 @@ class BarChartCard extends StatelessWidget {
           );
         },
         child: Card(
-          elevation: 2,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           child: Padding(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(4),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  chartData.title,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Text(
+                    chartData.title,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 Expanded(
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(6),
                     child: Container(
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
-                          colors: [gradientStartColor, gradientEndColor],
+                          colors: [
+                            colorScheme.primary.withValues(alpha: 0.2 * 255),
+                            colorScheme.primary.withValues(alpha: 0.05 * 255),
+                          ],
                         ),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 8, left: 8),
+                        padding: const EdgeInsets.only(
+                          left: 8,
+                          right: 8,
+                          top: 8,
+                        ),
                         child: BarChartHome(chartData: chartData),
                       ),
                     ),

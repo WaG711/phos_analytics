@@ -16,8 +16,8 @@ class DetailsBase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colors = theme.colorScheme;
+    final theme = Theme.of(context).textTheme;
+    final colors = Theme.of(context).colorScheme;
 
     return Scaffold(
       backgroundColor: colors.surface,
@@ -29,10 +29,6 @@ class DetailsBase extends StatelessWidget {
             QuickPeriodSelector(categoryId: chartData.categoryId),
             Expanded(
               child: Card(
-                elevation: 1,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(6),
-                ),
                 child: Padding(
                   padding: const EdgeInsets.only(
                     right: 20,
@@ -47,20 +43,14 @@ class DetailsBase extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    chartData.title,
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: colors.onSurface,
-                    ),
-                  ),
+                  Text(chartData.title, style: theme.titleMedium),
                   const SizedBox(height: 8),
                   Text(
                     chartData.description,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: colors.onSurface.withValues(alpha: 0.9 * 255),
+                    style: theme.bodyMedium?.copyWith(
+                      color: colors.onSurface.withValues(alpha: 170),
                     ),
                   ),
                 ],

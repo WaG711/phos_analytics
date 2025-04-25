@@ -5,6 +5,7 @@ import '../../../domain/entities/pie_chart_section.dart';
 class PieChartLegend extends StatelessWidget {
   final List<PieChartSection> chartData;
   final double total;
+
   const PieChartLegend({
     super.key,
     required this.chartData,
@@ -13,6 +14,9 @@ class PieChartLegend extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,6 +27,7 @@ class PieChartLegend extends StatelessWidget {
             return Container(
               padding: const EdgeInsets.only(right: 8, bottom: 16),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
@@ -34,11 +39,15 @@ class PieChartLegend extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  Text(data.title, style: const TextStyle(color: Colors.black)),
+                  Text(data.title, style: textTheme.bodyMedium),
                   const SizedBox(width: 8),
                   Text(
                     '${percentage.toStringAsFixed(1)}%',
-                    style: TextStyle(color: Colors.grey.shade600),
+                    style: textTheme.bodySmall?.copyWith(
+                      color: colorScheme.onSurfaceVariant.withValues(
+                        alpha: 0.6 * 255,
+                      ),
+                    ),
                   ),
                 ],
               ),

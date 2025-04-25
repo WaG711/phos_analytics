@@ -42,10 +42,69 @@ class MainApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: _buildAppTheme(),
         routes: {
           "/": (context) => const Home(),
           "/details": (context) => const Details(),
         },
+      ),
+    );
+  }
+
+  ThemeData _buildAppTheme() {
+    final base = ThemeData.light();
+
+    return base.copyWith(
+      colorScheme: const ColorScheme.light(
+        primary: Color(0xFF2E7D32),
+        onPrimary: Colors.white,
+        secondary: Color(0xFF66BB6A),
+        onSecondary: Colors.black87,
+        surface: Colors.white,
+        onSurface: Colors.black87,
+        error: Colors.red,
+        onError: Colors.white,
+      ),
+      scaffoldBackgroundColor: const Color(0xFFF5F5F5),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Color(0xFF2E7D32),
+        foregroundColor: Colors.white,
+        elevation: 2,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.black87,
+          backgroundColor: Colors.white,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+          ),
+          textStyle: const TextStyle(fontSize: 14),
+        ),
+      ),
+      cardTheme: CardTheme(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+        elevation: 2,
+        margin: const EdgeInsets.all(4),
+      ),
+      textTheme: base.textTheme.copyWith(
+        titleLarge: const TextStyle(
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
+          color: Colors.black87,
+        ),
+        titleMedium: const TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w600,
+          color: Colors.black87,
+        ),
+        bodyMedium: const TextStyle(fontSize: 14, color: Colors.black87),
+        bodySmall: const TextStyle(fontSize: 10),
+        labelLarge: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+          color: Colors.white,
+        ),
       ),
     );
   }

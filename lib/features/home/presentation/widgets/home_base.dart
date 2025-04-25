@@ -9,6 +9,7 @@ class HomeBase extends StatelessWidget {
   final List<ChartDataEH> chartDataList;
   final List<PieChartSection> pieChartSectionList;
   final double total;
+
   const HomeBase({
     super.key,
     required this.chartDataList,
@@ -32,8 +33,8 @@ class HomeBase extends StatelessWidget {
           sliver: SliverGrid(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              crossAxisSpacing: 8,
-              mainAxisSpacing: 8,
+              crossAxisSpacing: 1,
+              mainAxisSpacing: 1,
               childAspectRatio: 0.8,
             ),
             delegate: SliverChildBuilderDelegate(

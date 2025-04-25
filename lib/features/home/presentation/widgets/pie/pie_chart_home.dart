@@ -6,10 +6,13 @@ import '../../../domain/entities/pie_chart_section.dart';
 class PieChartHome extends StatelessWidget {
   final List<PieChartSection> pieChart;
   final double total;
+
   const PieChartHome({super.key, required this.pieChart, required this.total});
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return PieChart(
       PieChartData(
         borderData: FlBorderData(show: false),
@@ -22,10 +25,7 @@ class PieChartHome extends StatelessWidget {
                 color: data.color,
                 title: '',
                 radius: 40,
-                borderSide: const BorderSide(
-                  color: Color.fromRGBO(255, 255, 255, 0.5),
-                  width: 2,
-                ),
+                borderSide: BorderSide(color: colorScheme.onSurface, width: 1),
               );
             }).toList(),
       ),

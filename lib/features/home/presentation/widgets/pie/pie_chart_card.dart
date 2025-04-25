@@ -7,6 +7,7 @@ import '../../../domain/entities/pie_chart_section.dart';
 class PieChartCard extends StatelessWidget {
   final List<PieChartSection> pieChartSectionList;
   final double total;
+
   const PieChartCard({
     super.key,
     required this.pieChartSectionList,
@@ -18,15 +19,15 @@ class PieChartCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
       child: Card(
-        elevation: 2,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Text(
                 'Результат за прошлый месяц',
-                style: Theme.of(context).textTheme.titleMedium,
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
               ),
             ),
             SizedBox(

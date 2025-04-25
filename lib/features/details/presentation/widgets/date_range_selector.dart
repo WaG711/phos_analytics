@@ -14,11 +14,13 @@ class DateRangeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return FilledButton.tonal(
       style: FilledButton.styleFrom(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        backgroundColor: colorScheme.primary.withValues(alpha: 25),
       ),
       onPressed: () async {
         DateTime now = DateTime.now();
@@ -64,7 +66,7 @@ class DateRangeSelector extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.calendar_today, size: 18),
+          Icon(Icons.calendar_today, size: 18, color: colorScheme.primary),
           const SizedBox(width: 8),
           Text(
             "${DateFormat('dd.MM.yy').format(dateRange.start)} - "

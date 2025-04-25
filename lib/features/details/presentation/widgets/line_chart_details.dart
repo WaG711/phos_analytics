@@ -13,7 +13,7 @@ class LineChartDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colors = theme.colorScheme;
+    final colorScheme = theme.colorScheme;
 
     return LineChart(
       LineChartData(
@@ -26,7 +26,7 @@ class LineChartDetails extends StatelessWidget {
           drawVerticalLine: true,
           getDrawingHorizontalLine:
               (value) => FlLine(
-                color: colors.outline.withValues(alpha: 0.2 * 255),
+                color: colorScheme.outline.withValues(alpha: 0.2),
                 strokeWidth: 1,
               ),
         ),
@@ -48,7 +48,7 @@ class LineChartDetails extends StatelessWidget {
                   child: Text(
                     formatNumber(value),
                     style: theme.textTheme.bodySmall?.copyWith(
-                      color: colors.onSurface.withValues(alpha: 0.6 * 255),
+                      color: colorScheme.onSurface.withValues(alpha: 0.6),
                     ),
                     textAlign: TextAlign.right,
                   ),
@@ -74,7 +74,7 @@ class LineChartDetails extends StatelessWidget {
                     child: Text(
                       chartPoints[value.toInt()].date,
                       style: theme.textTheme.bodySmall?.copyWith(
-                        color: colors.onSurface.withValues(alpha: 0.6 * 255),
+                        color: colorScheme.onSurface.withValues(alpha: 0.6),
                       ),
                     ),
                   );
@@ -92,7 +92,7 @@ class LineChartDetails extends StatelessWidget {
                   return FlSpot(entry.key.toDouble(), entry.value.value);
                 }).toList(),
             isCurved: false,
-            color: colors.primary,
+            color: colorScheme.primary,
             barWidth: 3,
             isStrokeCapRound: true,
             dotData: FlDotData(
@@ -100,24 +100,24 @@ class LineChartDetails extends StatelessWidget {
               getDotPainter:
                   (spot, percent, barData, index) => FlDotCirclePainter(
                     radius: 4,
-                    color: colors.primary,
+                    color: colorScheme.primary,
                     strokeWidth: 2,
-                    strokeColor: colors.surface,
+                    strokeColor: colorScheme.surface,
                   ),
             ),
             belowBarData: BarAreaData(
               show: true,
               gradient: LinearGradient(
                 colors: [
-                  colors.primary.withValues(alpha: 0.3 * 255),
-                  colors.primary.withValues(alpha: 0.05 * 255),
+                  colorScheme.primary.withValues(alpha: 0.3),
+                  colorScheme.primary.withValues(alpha: 0.05),
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
             ),
             shadow: BoxShadow(
-              color: colors.primary.withValues(alpha: 0.2 * 255),
+              color: colorScheme.primary.withValues(alpha: 0.2),
               blurRadius: 8,
               spreadRadius: 2,
             ),
@@ -134,15 +134,15 @@ class LineChartDetails extends StatelessWidget {
                 return LineTooltipItem(
                   spot.y.toStringAsFixed(3),
                   TextStyle(
-                    color: colors.onPrimaryContainer,
+                    color: colorScheme.onPrimaryContainer,
                     fontWeight: FontWeight.bold,
                   ),
                 );
               }).toList();
             },
-            getTooltipColor: (LineBarSpot spot) => colors.primaryContainer,
+            getTooltipColor: (LineBarSpot spot) => colorScheme.primaryContainer,
             tooltipBorder: BorderSide(
-              color: colors.outline.withValues(alpha: 0.2 * 255),
+              color: colorScheme.outline.withValues(alpha: 0.2),
             ),
           ),
         ),

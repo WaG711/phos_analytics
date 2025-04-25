@@ -15,9 +15,8 @@ class BarChartHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const primaryColor = Color(0xFF6200EE);
-    const outlineColor = Color(0x1A000000);
-    const textColor = Color(0x99000000);
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return GestureDetector(
       onTap: () {
@@ -59,7 +58,11 @@ class BarChartHome extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 4),
                       child: Text(
                         chartData.points[index].date,
-                        style: const TextStyle(fontSize: 10, color: textColor),
+                        style: textTheme.bodySmall?.copyWith(
+                          color: colorScheme.onSurfaceVariant.withValues(
+                            alpha: 0.6 * 255,
+                          ),
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     );
@@ -73,7 +76,10 @@ class BarChartHome extends StatelessWidget {
             show: true,
             drawVerticalLine: false,
             getDrawingHorizontalLine:
-                (value) => const FlLine(color: outlineColor, strokeWidth: 1),
+                (value) => FlLine(
+                  color: colorScheme.outline.withValues(alpha: 0.1 * 255),
+                  strokeWidth: 1,
+                ),
           ),
           borderData: FlBorderData(show: false),
           barGroups:
@@ -85,17 +91,17 @@ class BarChartHome extends StatelessWidget {
                   barRods: [
                     BarChartRodData(
                       toY: point.value,
-                      color: primaryColor,
+                      color: colorScheme.primary,
                       width: 10,
                       borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(4),
+                        top: Radius.circular(6),
                       ),
                       backDrawRodData: BackgroundBarChartRodData(
                         show: true,
                         toY:
                             chartData.points.map((e) => e.value).reduce(max) *
                             1.2,
-                        color: const Color(0x1A6200EE),
+                        color: colorScheme.primary.withValues(alpha: 0.1 * 255),
                       ),
                     ),
                   ],
