@@ -9,8 +9,8 @@
 Главная страница. Расположено два блока:
   1. Сводка за прошлый месяц в процентном соотношении;
   2. Данные в виде столбчатой диаграммы за предыдущие 7 дней.
-
-  ![1](https://github.com/user-attachments/assets/9c083f96-3258-4bb8-b3e0-a6eb89f015d5)
+     
+  ![1](https://github.com/user-attachments/assets/6fdf436f-437c-4605-a5e1-0b89e57bc52c)
 
   ![2](https://github.com/user-attachments/assets/e58a507e-cd06-4c04-90a2-f229930eef3b)
   ![3](https://github.com/user-attachments/assets/8083615a-05d0-4843-9c6b-7db6f344aa0f)
